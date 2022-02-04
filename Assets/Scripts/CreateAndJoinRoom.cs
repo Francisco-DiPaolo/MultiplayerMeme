@@ -13,29 +13,12 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(enter))
         {
-            if (createInput.text != "")
-            {
-                CreateRoom();
-            }
-            if (joinInput.text != "")
-            {
-                JoinRoom();
-            }
+            if (createInput.text != "") CreateRoom();
+            if (joinInput.text != "")  JoinRoom();
         }
     }
-    public void CreateRoom()
-    {
-        PhotonNetwork.CreateRoom(createInput.text);
+    public void CreateRoom() => PhotonNetwork.CreateRoom(createInput.text);
+    public void JoinRoom() => PhotonNetwork.JoinRoom(joinInput.text);
+    public override void OnJoinedRoom() => PhotonNetwork.LoadLevel("Game");
 
-    }
-
-    public void JoinRoom()
-    {
-        PhotonNetwork.JoinRoom(joinInput.text);
-    }
-
-    public override void OnJoinedRoom()
-    {
-        PhotonNetwork.LoadLevel("Game");
-    }
 }
