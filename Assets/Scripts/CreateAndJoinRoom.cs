@@ -8,10 +8,25 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 {
     public InputField createInput;
     public InputField joinInput;
-
+    public KeyCode enter;
+    private void Update()
+    {
+        if (Input.GetKeyDown(enter))
+        {
+            if (createInput.text != "")
+            {
+                CreateRoom();
+            }
+            if (joinInput.text != "")
+            {
+                JoinRoom();
+            }
+        }
+    }
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(createInput.text);
+
     }
 
     public void JoinRoom()
@@ -21,6 +36,6 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("GamePrueba");
+        PhotonNetwork.LoadLevel("Game");
     }
 }
